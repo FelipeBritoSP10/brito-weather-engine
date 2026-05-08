@@ -1,2 +1,2 @@
-# brito-marvel-universe
-An interactive dashboard of the Marvel universe built with React and Mantine, consuming the Marvel API to dynamically explore characters, powers, and details.
+# Brito Weather Engine
+O **Brito Weather Engine** é um projeto desenvolvido para fins acadêmicos e profissionais, focado na aplicação de arquitetura modular, tipagem estrita com TypeScript e uma UI de alta fidelidade utilizando o ecossistema Mantine.
