@@ -8,6 +8,7 @@ interface MetricCardProps {
 }
 
 export const MetricCard = ({ label, value, icon, bg = 'white' }: MetricCardProps) => (
+  
   <Box 
     p="xl" 
     bg={bg} 
