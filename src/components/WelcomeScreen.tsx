@@ -1,4 +1,4 @@
-import { Stack, Text, TextInput, Button, Paper } from '@mantine/core';
+import { Stack, Text, TextInput, Button} from '@mantine/core';
 import { useState } from 'react';
 
 export const WelcomeScreen = ({ onConfirm }: any) => {
