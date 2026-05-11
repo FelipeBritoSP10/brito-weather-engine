@@ -1,42 +1,26 @@
-import { MantineProvider, Center, Paper, Container, Stack } from '@mantine/core';
-import { useEffect } from 'react';
+import { MantineProvider, Center, Stack, Paper } from '@mantine/core';
 import { theme } from './styles/theme';
-import { useWeather } from './hooks/useWeather';
-import { useUser } from './hooks/useUser';
-import { Header } from './components/Header';
-import { SearchBar } from './components/SearchBar';
-import { WeatherCard } from './components/WeatherCard';
-import { WelcomeScreen } from './components/WelcomeScreen';
+import { useWeather, useUser, useWeatherStorage } from './hooks';
+import { Header, SearchBar, WeatherCard, WelcomeScreen, HistorySection } from './components';
 import '@mantine/core/styles.css';
-
 export default function App() {
-  const { data, loading, getWeather } = useWeather();
   const { userName, isFirstAccess, saveName } = useUser();
-
-  useEffect(() => { 
-    if (!isFirstAccess) getWeather('Santa Izabel do Pará'); 
-  }, [isFirstAccess]);
-
-  if (isFirstAccess) {
-    return (
-      <MantineProvider theme={theme}>
-        <WelcomeScreen onConfirm={saveName} />
-      </MantineProvider>
-    );
-  }
+  const { history, favorites, saveSearch, toggleFavorite } = useWeatherStorage();
+  const { data, loading, getWeather } = useWeather(saveSearch);
 
   return (
     <MantineProvider theme={theme}>
-      <Center bg="#F1F5F9" style={{ minHeight: '100vh' }}>
-        <Container size="xs" w="100%">
-          <Paper p={40}>
-            <Stack gap={0}>
+      <Center bg="#F1F5F9" style={{ minHeight: '100vh', padding: 20 }}>
+        <Paper p={40} radius={32} shadow="md" w="100%" style={{ maxWidth: 450 }}>
+          {isFirstAccess ? <WelcomeScreen onConfirm={saveName} /> : (
+            <Stack gap="xl">
               <Header userName={userName} />
               <SearchBar onSearch={getWeather} loading={loading} />
-              {data && <WeatherCard data={data} />}
+              {data ? <WeatherCard data={data} isFavorite={favorites.includes(data.name)} onToggleFavorite={toggleFavorite} />
+                : <HistorySection history={history} onSelect={getWeather} />}
             </Stack>
-          </Paper>
-        </Container>
+          )}
+        </Paper>
       </Center>
     </MantineProvider>
   );

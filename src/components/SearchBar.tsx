@@ -1,15 +1,20 @@
 import { TextInput } from '@mantine/core';
 
 export const SearchBar = ({ onSearch, loading }: any) => (
-  <TextInput
-    variant="filled"
-    radius="xl"
-    size="md"
-    placeholder="Buscar cidade..."
-    disabled={loading}
+  <TextInput 
+    placeholder="Buscar cidade..." 
+    size="lg" 
+    radius="md"
     onKeyDown={(e) => e.key === 'Enter' && onSearch(e.currentTarget.value)}
+    rightSection={loading ? '⏳' : '🔍'}
     styles={{
-      input: { backgroundColor: '#F3F4F6', border: 'none', textAlign: 'center' }
+      input: { 
+        backgroundColor: 'white', 
+        border: '1px solid #E2E8F0',
+        height: '60px',
+        fontSize: '16px',
+        borderRadius: '16px'
+      }
     }}
   />
 );
