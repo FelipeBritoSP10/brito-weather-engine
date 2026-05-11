@@ -1,4 +1,4 @@
-import { Stack, Text, Group, Box, SimpleGrid, UnstyledButton, Paper } from '@mantine/core';
+import { Stack, Text, Group, SimpleGrid, UnstyledButton, Paper } from '@mantine/core';
 import { MetricCard } from './MetricCard';
 
 interface WeatherCardProps {
@@ -9,8 +9,6 @@ interface WeatherCardProps {
 
 export const WeatherCard = ({ data, isFavorite, onToggleFavorite }: WeatherCardProps) => (
   <Stack gap="md" w="100%" style={{ maxWidth: 420 }}>
-    
-    {/* Card Principal da Cidade */}
     <Paper 
       p={35} 
       bg="white" 
@@ -20,8 +18,7 @@ export const WeatherCard = ({ data, isFavorite, onToggleFavorite }: WeatherCardP
         borderColor: '#E2E8F0',
         boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.05)',
         position: 'relative' 
-      }} 
-    >
+      }}>
       <UnstyledButton 
         onClick={() => onToggleFavorite(data.name)}
         style={{ 
@@ -30,12 +27,13 @@ export const WeatherCard = ({ data, isFavorite, onToggleFavorite }: WeatherCardP
           right: 25, 
           fontSize: 22,
           zIndex: 10 
-        }}
-      >
+        }}>
         {isFavorite ? '⭐' : '☆'}
       </UnstyledButton>
 
-      <Text size="10px" fw={800} c="teal.7" lts={2}>LOCALIZAÇÃO ATUAL</Text>
+      <Text size="10px" fw={800} c="teal.7" lts={2}>
+        LOCALIZAÇÃO ATUAL
+      </Text>
       
       <Group justify="space-between" align="flex-end" mt={10} wrap="nowrap">
         <Stack gap={0}>
@@ -52,19 +50,15 @@ export const WeatherCard = ({ data, isFavorite, onToggleFavorite }: WeatherCardP
       </Group>
     </Paper>
 
-    {/* Grid de Métricas Secundárias */}
     <SimpleGrid cols={2} spacing="md">
-      {/* Aqui chamamos o MetricCard puro, o fundo já está dentro dele */}
       <MetricCard 
         label="UMIDADE" 
         value={`${data.main.humidity}%`} 
-        icon="💧" 
-      />
+        icon="💧"/>
       <MetricCard 
         label="SENSAÇÃO" 
         value={`${Math.round(data.main.feels_like)}°`} 
-        icon="🌡️" 
-      />
+        icon="🌡️"/>
     </SimpleGrid>
   </Stack>
 );
